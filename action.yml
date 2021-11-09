@@ -26,6 +26,10 @@ runs:
       shell: bash
       run: |
         barbarian export ${{ inputs.recipe_path }} ${{ inputs.package_name }}/${{ inputs.package_version }}@${{ github.repository }}
+    - name: Set git name
+      shell: bash
+      run: |
+        git config --global user.name '${{ github.repository_owner }}'
     - name: Upload recipe
       shell: bash
       run: |
