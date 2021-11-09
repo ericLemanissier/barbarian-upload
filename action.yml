@@ -1,0 +1,35 @@
+name: 'Upload to Barbarian'
+description: 'Upload a recipe to Barbarian remote'
+author: 'ericLemanissier'
+inputs:
+  recipe_path:
+    description: "The path to the recipe to upload"
+    required: true
+  package_name:
+    description: "The name of the package to upload"
+    required: true
+  package_version:
+    description: "The version number of the package to upload"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Install barbarian
+      run: |
+        pip3 install wheel barbarian
+      shell: bash
+    - name: Fix path on Linux
+      run: |
+        echo "/home/runner/.local/bin" >> $GITHUB_PATH
+      shell: bash
+    - name: Export recipe
+      shell: bash
+      run: |
+        barbarian export ${{ inputs.recipe_path }} ${{ inputs.package_name }}/${{ inputs.package_version }}@${{ github.repository }}
+    - name: Upload recipe
+      shell: bash
+      run: |
+        barbarian upload ${{ inputs.package_name }}/${{ inputs.package_version }}@${{ github.repository }}
+branding:
+  icon: "upload-cloud"
+  color: "green"
