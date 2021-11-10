@@ -38,6 +38,10 @@ runs:
       shell: bash
       run: |
         git fetch origin barbarian || echo barbarian branch does not exist yet, it will be created in the next step
+    - name: create local barbarian branch
+      shell: bash
+      run: |        
+        git branch barbarian origin/barbarian || echo barbarian branch does not exist yet, it will be created in the next step
     - name: Upload recipe
       shell: bash
       run: |
