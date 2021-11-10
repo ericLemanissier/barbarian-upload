@@ -22,6 +22,10 @@ runs:
       run: |
         echo "/home/runner/.local/bin" >> $GITHUB_PATH
       shell: bash
+    - name: Workaround bfgroup/barbarian#16
+      run: |
+        mkdir -p .conan/hooks
+      shell: bash
     - name: Export recipe
       shell: bash
       run: |
