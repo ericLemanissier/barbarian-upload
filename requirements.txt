@@ -1,2 +1,2 @@
-wheel==0.42.0
+wheel==0.43.0
 barbarian==0.3.0
